@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="22sp"
+        android:text="Регистрация нового сотрудника"/>
+
+    <TextView
+        android:id="@+id/textViewLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_below="@id/textViewTitle"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_grey"
+        android:text="Логин"/>
+
+    <EditText
+        android:id="@+id/loginID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewLogin"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_below="@id/loginID"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_grey"
+        android:text="Пароль"/>
+
+    <EditText
+        android:id="@+id/passwordID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewPassword"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/grey3"
+        android:layout_marginHorizontal="140dp"
+        android:textColor="@color/grey4"
+        android:textStyle="bold"
+        android:text="Добавить"
+        android:layout_below="@id/passwordID"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        android:layout_marginTop="45dp"
+        android:layout_below="@id/buttonAdd"
+        android:src="@drawable/padlock"/>
+
+    <Button
+        android:id="@+id/backSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue_main"
+        android:layout_marginHorizontal="100dp"
+        android:textSize="16sp"
+        android:text="Назад"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"/>
+
+</RelativeLayout>
