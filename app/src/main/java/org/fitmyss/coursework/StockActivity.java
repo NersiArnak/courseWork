@@ -1,5 +1,6 @@
 package org.fitmyss.coursework;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ public class StockActivity extends AppCompatActivity {
     private TextView textCashBalance;
 
     private static final String PREFS_NAME = "ShopPrefs";
-    private static final String CASH_BALANCE_KEY = "cashBalance";
+    private static final String CASH_BALANCE_KEY_STOCK = "cashBalance";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,15 @@ public class StockActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 viewProductsStock();
+            }
+        });
+
+        Button backStock = findViewById(R.id.backStock);
+        backStock.setOnClickListener(new View.OnClickListener() { // Теперь backShop инициализирован
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(StockActivity.this, NewActivity.class);
+                startActivity(intent3);
             }
         });
 
@@ -155,7 +165,7 @@ public class StockActivity extends AppCompatActivity {
         Data product = new Data(id, quantity, price, name, characteristics);
         dbHelper.addProductStock(product);
 
-        dbHelper.updateCashBalance(price); // Увеличиваем значение кассы на цену товара
+        dbHelper.updateCashBalanceStock(price); // Увеличиваем значение кассы на цену товара
 
         cashBalance += price;
         textCashBalance.setText("Кассовый баланс: " + cashBalance);
@@ -192,13 +202,13 @@ public class StockActivity extends AppCompatActivity {
     private void saveCashBalance() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(CASH_BALANCE_KEY, cashBalance);
+        editor.putInt(CASH_BALANCE_KEY_STOCK, cashBalance);
         editor.apply();
     }
 
     private void loadCashBalance() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        cashBalance = sharedPreferences.getInt(CASH_BALANCE_KEY, 0);
+        cashBalance = sharedPreferences.getInt(CASH_BALANCE_KEY_STOCK, 0);
         textCashBalance.setText("Кассовый баланс: " + cashBalance);
     }
 }

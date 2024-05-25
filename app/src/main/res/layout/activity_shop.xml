@@ -5,15 +5,31 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textCashBalance"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Общая касса: 0"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:gravity="end|center_vertical">
+
+        <TextView
+            android:id="@+id/textCashBalanceStock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Общая касса: 0"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_shop_mini"
+            android:layout_gravity="end"
+            android:layout_marginRight="5dp"/>
+    </LinearLayout>
 
     <EditText
         android:layout_marginTop="10dp"
@@ -54,33 +70,43 @@
         android:id="@+id/buttonAddProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/blue"
-        android:text="Add Product" />
+        android:textStyle="bold"
+        android:text="Добавить" />
 
     <Button
         android:id="@+id/buttonViewProducts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/blue"
-        android:text="View Products" />
-    <Button
-        android:id="@+id/buttonDeleteProducts"
+        android:textStyle="bold"
+        android:text="Показать" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/blue"
-        android:text="Удаление по id" />
-    <Button
-        android:id="@+id/buttonUpdateProducts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/blue"
-        android:text="Обновление по id" />
+        android:orientation="horizontal">
 
-
+        <Button
+            android:id="@+id/buttonDeleteProducts"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/blue"
+            android:textStyle="bold"
+            android:text="Удаление" />
+        <Button
+            android:id="@+id/buttonUpdateProducts"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/blue"
+            android:textStyle="bold"
+            android:text="Обновление" />
+    </LinearLayout>
 
 
     <ListView
@@ -89,5 +115,15 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/backShop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue_main"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:text="Назад" />
 
 </LinearLayout>

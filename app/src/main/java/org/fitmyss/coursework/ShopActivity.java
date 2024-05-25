@@ -1,6 +1,6 @@
 package org.fitmyss.coursework;
 
-
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -15,16 +15,12 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.fitmyss.coursework.DBHelper;
-import org.fitmyss.coursework.Data;
-import org.fitmyss.coursework.R;
-
 import java.util.ArrayList;
 
 public class ShopActivity extends AppCompatActivity {
 
     private EditText editProductId, editQuantity, editPrice, editName, editCharacteristics;
-    private Button buttonAddProduct, buttonViewProducts, buttonDeleteProducts;
+    private Button buttonAddProduct, buttonViewProducts, buttonDeleteProducts, backShop;
     private ListView productListView;
     private DBHelper dbHelper;
     private ArrayAdapter<String> adapter;
@@ -32,7 +28,7 @@ public class ShopActivity extends AppCompatActivity {
 
     private int cashBalance = 0;
 
-    private TextView textCashBalance; // Перемещаем сюда, чтобы инициализировать после загрузки макета
+    private TextView textCashBalance;
 
     private static final String PREFS_NAME = "ShopPrefs";
     private static final String CASH_BALANCE_KEY = "cashBalance";
@@ -53,9 +49,12 @@ public class ShopActivity extends AppCompatActivity {
 
         buttonAddProduct = findViewById(R.id.buttonAddProduct);
         buttonViewProducts = findViewById(R.id.buttonViewProducts);
-        productListView = findViewById(R.id.productListView);
         buttonDeleteProducts = findViewById(R.id.buttonDeleteProducts);
-        textCashBalance = findViewById(R.id.textCashBalance); // Инициализируем здесь
+        backShop = findViewById(R.id.backShop); // Инициализируем backShop
+
+        textCashBalance = findViewById(R.id.textCashBalanceStock);
+
+        productListView = findViewById(R.id.productListView);
 
         productList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, productList);
@@ -68,10 +67,11 @@ public class ShopActivity extends AppCompatActivity {
             }
         });
 
-        buttonViewProducts.setOnClickListener(new View.OnClickListener() {
+        backShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewProducts();
+                Intent intent3 = new Intent(ShopActivity.this, NewActivity.class);
+                startActivity(intent3);
             }
         });
 
@@ -127,6 +127,13 @@ public class ShopActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(ShopActivity.this, "Введите ID продукта для обновления", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        buttonViewProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewProducts();
             }
         });
 
@@ -202,5 +209,4 @@ public class ShopActivity extends AppCompatActivity {
         cashBalance = sharedPreferences.getInt(CASH_BALANCE_KEY, 0);
         textCashBalance.setText("Кассовый баланс: " + cashBalance);
     }
-
 }

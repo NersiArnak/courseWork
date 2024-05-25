@@ -28,9 +28,14 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COL_CHARACTERISTICS_STOCK = "characteristics";
 
     private int cashBalance = 0;
+    private int cashBalanceStock = 0;
 
     public void updateCashBalance(int amount) {
         cashBalance += amount;
+    }
+
+    public void updateCashBalanceStock(int amount) {
+        cashBalanceStock += amount;
     }
 
     private static final int DATABASE_VERSION = 4;
@@ -191,6 +196,8 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+
+
     public void addProductStock(Data objData){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues db = new ContentValues();
@@ -266,7 +273,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COL_CHARACTERISTICS_STOCK, newData.getCharacteristics());
 
         int newPrice = newData.getPrice() * newData.getQuantity();
-        updateCashBalance(newPrice - getProductPriceStock(newData.getId()));
+        updateCashBalanceStock(newPrice - getProductPriceStock(newData.getId()));
         db.update(PRODUCTS_TABLE_STOCK, values, COL_ID_STOCK + " = ?", new String[]{String.valueOf(newData.getId())});
         db.close();
     }
