@@ -6,7 +6,7 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textCashBalance"
+        android:id="@+id/textCashBalanceStock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Общая касса: 0"
@@ -17,41 +17,41 @@
 
     <EditText
         android:layout_marginTop="10dp"
-        android:id="@+id/editProductId"
+        android:id="@+id/editProductIdStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Id"
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/editQuantity"
+        android:id="@+id/editQuantityStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Количество"
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/editPrice"
+        android:id="@+id/editPriceStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Цена" />
 
     <EditText
-        android:id="@+id/editName"
+        android:id="@+id/editNameStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Наименование"
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/editCharacteristics"
+        android:id="@+id/editCharacteristicsStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Характеристики"
         android:inputType="text" />
 
     <Button
-        android:id="@+id/buttonAddProduct"
+        android:id="@+id/buttonAddProductStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -59,21 +59,21 @@
         android:text="Add Product" />
 
     <Button
-        android:id="@+id/buttonViewProducts"
+        android:id="@+id/buttonViewProductsStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/blue"
         android:text="View Products" />
     <Button
-        android:id="@+id/buttonDeleteProducts"
+        android:id="@+id/buttonDeleteProductsStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/blue"
         android:text="Удаление по id" />
     <Button
-        android:id="@+id/buttonUpdateProducts"
+        android:id="@+id/buttonUpdateProductsStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -84,7 +84,7 @@
 
 
     <ListView
-        android:id="@+id/productListView"
+        android:id="@+id/productListViewStock"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"

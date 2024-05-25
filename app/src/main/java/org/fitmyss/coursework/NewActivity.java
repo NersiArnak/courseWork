@@ -22,6 +22,7 @@ public class NewActivity extends AppCompatActivity {
         addEmailUser = findViewById(R.id.addEmailUser);
         Button btnBack = findViewById(R.id.backNewActivity);
         Button btnListShop = findViewById(R.id.shopButton);
+        Button btnListStock = findViewById(R.id.stockButton);
 
         String email = getIntent().getStringExtra("EMAIL");
         if (email != null) {
@@ -44,6 +45,16 @@ public class NewActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+
+        btnListStock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(NewActivity.this, StockActivity.class);
+                startActivity(intent2);
+            }
+        });
+
+
 
 
 
