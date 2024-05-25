@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
                         // Проверяем пароль
                         if (dbHelper.checkUserPassword(email, password)) {
                             // Почта и пароль совпадают, переходим к новой активности
-                            Toast.makeText(MainActivity.this, "Вы зашли в аккаунт продавца", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainActivity.this, NewActivity.class); // Поменяйте на свою активность
+                            Intent intent = new Intent(MainActivity.this, NewActivity.class);
+                            intent.putExtra("EMAIL", email); // Передача электронной почты в Intent
                             startActivity(intent);
                         } else {
                             // Пароль неверный
