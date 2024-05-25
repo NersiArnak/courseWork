@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/editProductId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Артикул"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/editQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Количество"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/editPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Цена" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Наименование"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editCharacteristics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Характеристики"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/buttonAddProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Add Product" />
+
+    <Button
+        android:id="@+id/buttonViewProducts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="View Products" />
+
+    <TextView
+        android:id="@+id/textCashBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cash Balance: 0"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+
+    <ListView
+        android:id="@+id/productListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

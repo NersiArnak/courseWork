@@ -39,9 +39,9 @@ public class SignupActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = editLogin.getText().toString();
-                String serName = editPassword.getText().toString();
-                Data objDataAdd = new Data(name, serName);
+                String login = editLogin.getText().toString();
+                String password = editPassword.getText().toString();
+                Data objDataAdd = new Data(login, password);
                 dbHelper.addOne(objDataAdd);
             }
         });

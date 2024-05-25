@@ -42,15 +42,18 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Введите почту и пароль", Toast.LENGTH_SHORT).show();
                 } else {
                     if (dbHelper.checkUserByEmail(email)) {
+                        // Проверяем пароль
                         if (dbHelper.checkUserPassword(email, password)) {
+                            // Почта и пароль совпадают, переходим к новой активности
                             Toast.makeText(MainActivity.this, "Вы зашли в аккаунт продавца", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainActivity.this, NewActivity.class);
-                            intent.putExtra("EMAIL", email);
+                            Intent intent = new Intent(MainActivity.this, NewActivity.class); // Поменяйте на свою активность
                             startActivity(intent);
                         } else {
+                            // Пароль неверный
                             Toast.makeText(MainActivity.this, "Неверный пароль", Toast.LENGTH_SHORT).show();
                         }
                     } else {
+                        // Пользователь не найден
                         Toast.makeText(MainActivity.this, "Пользователь с такой почтой не найден", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         textSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                Intent intent = new Intent(MainActivity.this, SignupActivity.class); // Исправлено здесь
                 startActivity(intent);
             }
         });

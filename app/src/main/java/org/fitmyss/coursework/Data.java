@@ -20,8 +20,7 @@ public class Data {
         this.password = password;
     }
 
-    public Data(String email, int id, int quantity, int price, String nameProduct, String characteristics) {
-        this.email = email;
+    public Data(int id, int quantity, int price, String nameProduct, String characteristics) {
         this.id = id;
         this.quantity = quantity;
         this.price = price;
