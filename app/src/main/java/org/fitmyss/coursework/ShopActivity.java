@@ -1,5 +1,6 @@
 package org.fitmyss.coursework;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,9 @@ public class ShopActivity extends AppCompatActivity {
     private int cashBalance = 0;
 
     private TextView textCashBalance; // Перемещаем сюда, чтобы инициализировать после загрузки макета
+
+    private static final String PREFS_NAME = "ShopPrefs";
+    private static final String CASH_BALANCE_KEY = "cashBalance";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,9 @@ public class ShopActivity extends AppCompatActivity {
                 viewProducts();
             }
         });
+
+        // Загрузка сохраненного кассового баланса
+        loadCashBalance();
     }
 
     private void addProduct() {
@@ -82,14 +89,16 @@ public class ShopActivity extends AppCompatActivity {
         cashBalance += price;
         textCashBalance.setText("Кассовый баланс: " + cashBalance);
 
-        Toast.makeText(this, "Product added successfully!", Toast.LENGTH_SHORT).show();
-    }
+        // Сохраняем обновленный кассовый баланс
+        saveCashBalance();
 
+        Toast.makeText(this, "Товар добавлен успешно!", Toast.LENGTH_SHORT).show();
+    }
 
     private void viewProducts() {
         Cursor cursor = dbHelper.getAllProducts();
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No products found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Товары не найдены", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -107,5 +116,18 @@ public class ShopActivity extends AppCompatActivity {
 
         adapter.notifyDataSetChanged();
         cursor.close();
+    }
+
+    private void saveCashBalance() {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(CASH_BALANCE_KEY, cashBalance);
+        editor.apply();
+    }
+
+    private void loadCashBalance() {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        cashBalance = sharedPreferences.getInt(CASH_BALANCE_KEY, 0);
+        textCashBalance.setText("Кассовый баланс: " + cashBalance);
     }
 }
