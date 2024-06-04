@@ -32,12 +32,10 @@ public class NewActivity extends AppCompatActivity {
         Button btnListShop = findViewById(R.id.shopButton);
         Button btnListStock = findViewById(R.id.stockButton);
 
-        // Получаем email из Intent, если он есть
         String email = getIntent().getStringExtra("EMAIL");
         if (email != null) {
             addEmailUser.setText(email);
         } else {
-            // Если email в Intent отсутствует, получаем его из SharedPreferences
             sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
             email = sharedPreferences.getString("email", null);
             if (email != null) {
@@ -75,7 +73,6 @@ public class NewActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        // Сохраняем значение addEmailUser в SharedPreferences при уничтожении активности
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("email", addEmailUser.getText().toString());
         editor.apply();

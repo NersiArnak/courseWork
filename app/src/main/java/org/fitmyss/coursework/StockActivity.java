@@ -15,16 +15,12 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.fitmyss.coursework.DBHelper;
-import org.fitmyss.coursework.Data;
-import org.fitmyss.coursework.R;
-
 import java.util.ArrayList;
 
 public class StockActivity extends AppCompatActivity {
 
     private EditText editProductId, editQuantity, editPrice, editName, editCharacteristics;
-    private Button buttonAddProduct, buttonViewProducts, buttonDeleteProducts;
+    private Button buttonAddProduct, buttonViewProducts, buttonDeleteProducts, updateButton;
     private ListView productListView;
     private DBHelper dbHelper;
     private ArrayAdapter<String> adapter;
@@ -54,8 +50,9 @@ public class StockActivity extends AppCompatActivity {
         buttonAddProduct = findViewById(R.id.buttonAddProductStock);
         buttonViewProducts = findViewById(R.id.buttonViewProductsStock);
         productListView = findViewById(R.id.productListViewStock);
-        buttonDeleteProducts = findViewById(R.id.buttonDeleteProductsStock);
+        buttonDeleteProducts = findViewById(R.id.buttonSellProductsStock);
         textCashBalance = findViewById(R.id.textCashBalanceStock);
+        updateButton = findViewById(R.id.buttonUpdateProductsStock);
 
         productList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, productList);
@@ -84,27 +81,27 @@ public class StockActivity extends AppCompatActivity {
             }
         });
 
+        buttonDeleteProducts.setText("Продать");
         buttonDeleteProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String idString = editProductId.getText().toString();
+                String idString = editProductId.getText().toString(); // Получаем ID из EditText
                 if (!idString.isEmpty()) {
                     int id = Integer.parseInt(idString);
                     int priceToDelete = dbHelper.getProductPriceStock(id);
-                    dbHelper.deleteProductStock(id);
-                    cashBalance -= priceToDelete;
-                    textCashBalance.setText("Кассовый баланс: " + cashBalance);
+                    dbHelper.sellProductStock(id); // Изменили на sellProduct
+                    cashBalance += priceToDelete; // Вместо уменьшения, увеличиваем кассовый баланс
+                    textCashBalance.setText("Общая касса: " + cashBalance);
                     saveCashBalance();
 
                     viewProductsStock();
-                    Toast.makeText(StockActivity.this, "Продукт удален", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StockActivity.this, "Продукт продан", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(StockActivity.this, "Введите ID продукта для удаления", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StockActivity.this, "Введите ID продукта для продажи", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        Button updateButton = findViewById(R.id.buttonUpdateProductsStock);
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,11 +121,21 @@ public class StockActivity extends AppCompatActivity {
                     int quantity = Integer.parseInt(quantityString);
                     int price = Integer.parseInt(priceString);
 
-                    // Умножаем цену на количество
+                    int currentPrice = dbHelper.getProductPriceStock(id);
+
                     price *= quantity;
+
+                    int priceDifference = price - currentPrice;
 
                     Data newData = new Data(id, quantity, price, name, characteristics);
                     dbHelper.updateProductStock(newData);
+
+                    if (priceDifference < 0) {
+                        cashBalance += Math.abs(priceDifference);
+                    } else if (priceDifference > 0) {
+                    }
+
+                    textCashBalance.setText("Общая касса: " + cashBalance);
 
                     viewProductsStock();
 
@@ -140,6 +147,7 @@ public class StockActivity extends AppCompatActivity {
         });
 
         loadCashBalance();
+
     }
 
     private void addProductStock() {
@@ -149,7 +157,6 @@ public class StockActivity extends AppCompatActivity {
         String name = editName.getText().toString().trim();
         String characteristics = editCharacteristics.getText().toString().trim();
 
-        // Проверяем, заполнены ли все поля
         if (idString.isEmpty() || quantityString.isEmpty() || priceString.isEmpty() || name.isEmpty() || characteristics.isEmpty()) {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show();
             return;
@@ -159,19 +166,10 @@ public class StockActivity extends AppCompatActivity {
         int quantity = Integer.parseInt(quantityString);
         int price = Integer.parseInt(priceString);
 
-        // Умножаем цену на количество
         price *= quantity;
 
         Data product = new Data(id, quantity, price, name, characteristics);
         dbHelper.addProductStock(product);
-
-        dbHelper.updateCashBalanceStock(price); // Увеличиваем значение кассы на цену товара
-
-        cashBalance += price;
-        textCashBalance.setText("Кассовый баланс: " + cashBalance);
-
-        // Сохраняем обновленный кассовый баланс
-        saveCashBalance();
 
         Toast.makeText(this, "Товар добавлен успешно!", Toast.LENGTH_SHORT).show();
     }
@@ -179,7 +177,8 @@ public class StockActivity extends AppCompatActivity {
     private void viewProductsStock() {
         Cursor cursor = dbHelper.getAllProductsStock();
         if (cursor.getCount() == 0) {
-            Toast.makeText(this, "Товары не найдены", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this
+                    , "Товары не найдены", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -192,7 +191,7 @@ public class StockActivity extends AppCompatActivity {
             stringBuilder.append("Name: ").append(cursor.getString(3)).append("\n");
             stringBuilder.append("Characteristics: ").append(cursor.getString(4)).append("\n\n");
             productList.add(stringBuilder.toString());
-            stringBuilder.setLength(0); // Clear the StringBuilder for the next product
+            stringBuilder.setLength(0);
         }
 
         adapter.notifyDataSetChanged();
@@ -209,6 +208,6 @@ public class StockActivity extends AppCompatActivity {
     private void loadCashBalance() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         cashBalance = sharedPreferences.getInt(CASH_BALANCE_KEY_STOCK, 0);
-        textCashBalance.setText("Кассовый баланс: " + cashBalance);
+        textCashBalance.setText("Общая касса: " + cashBalance);
     }
 }

@@ -71,11 +71,14 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         }
 
-        // Методы для таблицы контактов
         public void deleteAllContacts() {
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
             sqLiteDatabase.delete(CONTACTS_TABLE, null, null);
             sqLiteDatabase.close();
+        }
+        public Cursor getAllContacts() {
+            SQLiteDatabase db = this.getWritableDatabase();
+            return db.rawQuery("SELECT * FROM " + CONTACTS_TABLE, null);
         }
 
         public void addContact(Data objData){
@@ -85,11 +88,6 @@ public class DBHelper extends SQLiteOpenHelper {
             db.put(COL_PASSWORD, objData.password);
             sqLiteDatabase.insert(CONTACTS_TABLE, null, db);
             sqLiteDatabase.close();
-        }
-
-        public Cursor getAllContacts() {
-            SQLiteDatabase db = this.getWritableDatabase();
-            return db.rawQuery("SELECT * FROM " + CONTACTS_TABLE, null);
         }
 
         public boolean checkUserByEmail(String email) {
@@ -108,7 +106,6 @@ public class DBHelper extends SQLiteOpenHelper {
             return correctPassword;
         }
 
-    // Методы для таблицы продуктов
     public void addProduct(Data objData){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues db = new ContentValues();
@@ -154,9 +151,15 @@ public class DBHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public void deleteProduct(int productId) {
+    public void sellProduct(int productId) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(PRODUCTS_TABLE, COL_ID + "=?", new String[]{String.valueOf(productId)});
+        db.close();
+    }
+
+    public void sellProductStock(int productId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(PRODUCTS_TABLE_STOCK, COL_ID_STOCK + "=?", new String[]{String.valueOf(productId)});
         db.close();
     }
 
@@ -174,7 +177,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return price;
     }
-
     public void updateProduct(Data newData) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -183,15 +185,11 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COL_NAME, newData.getName());
         values.put(COL_CHARACTERISTICS, newData.getCharacteristics());
 
-        // Умножаем новую цену на новое количество для обновления кассового баланса
         int newPrice = newData.getPrice() * newData.getQuantity();
         updateCashBalance(newPrice - getProductPrice(newData.getId())); // Обновляем кассовый баланс на разницу старой и новой цен
         db.update(PRODUCTS_TABLE, values, COL_ID + " = ?", new String[]{String.valueOf(newData.getId())});
         db.close();
     }
-
-
-
 
     public void addProductStock(Data objData){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();

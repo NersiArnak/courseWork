@@ -16,7 +16,7 @@
             android:id="@+id/textCashBalanceStock"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Общая касса: 0"
+            android:text="@string/general_cash_register"
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -36,34 +36,34 @@
         android:id="@+id/editProductId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Id"
+        android:hint="@string/id"
         android:inputType="number" />
 
     <EditText
         android:id="@+id/editQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Количество"
+        android:hint="@string/line_1"
         android:inputType="number" />
 
     <EditText
         android:id="@+id/editPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Цена" />
+        android:hint="@string/line_2" />
 
     <EditText
         android:id="@+id/editName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Наименование"
+        android:hint="@string/line_3"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/editCharacteristics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Характеристики"
+        android:hint="@string/line_4"
         android:inputType="text" />
 
     <Button
@@ -73,7 +73,7 @@
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/blue"
         android:textStyle="bold"
-        android:text="Добавить" />
+        android:text="@string/btn_add_text" />
 
     <Button
         android:id="@+id/buttonViewProducts"
@@ -82,7 +82,7 @@
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/blue"
         android:textStyle="bold"
-        android:text="Показать" />
+        android:text="@string/button_show_text" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -90,14 +90,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonDeleteProducts"
+            android:id="@+id/buttonSellProducts"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:backgroundTint="@color/blue"
             android:textStyle="bold"
-            android:text="Удалить" />
+            android:text="@string/button_sell_text" />
         <Button
             android:id="@+id/buttonUpdateProducts"
             android:layout_width="180dp"
@@ -105,7 +105,7 @@
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/blue"
             android:textStyle="bold"
-            android:text="Обновить" />
+            android:text="@string/button_refresh_text" />
     </LinearLayout>
 
 
@@ -124,6 +124,6 @@
         android:layout_marginHorizontal="100dp"
         android:layout_marginBottom="10dp"
         android:textStyle="bold"
-        android:text="Назад" />
+        android:text="@string/back" />
 
 </LinearLayout>

@@ -10,7 +10,7 @@
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
         android:textSize="22sp"
-        android:text="Регистрация нового сотрудника"/>
+        android:text="@string/main_text_sugnup"/>
 
     <TextView
         android:id="@+id/textViewLogin"
@@ -22,7 +22,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="@color/dark_grey"
-        android:text="Логин"/>
+        android:text="@string/login"/>
 
     <EditText
         android:id="@+id/loginID"
@@ -42,7 +42,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="@color/dark_grey"
-        android:text="Пароль"/>
+        android:text="@string/password"/>
 
     <EditText
         android:id="@+id/passwordID"
@@ -60,7 +60,7 @@
         android:layout_marginHorizontal="140dp"
         android:textColor="@color/grey4"
         android:textStyle="bold"
-        android:text="Добавить"
+        android:text="@string/btn_add_text"
         android:layout_below="@id/passwordID"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
@@ -79,7 +79,7 @@
         android:backgroundTint="@color/blue_main"
         android:layout_marginHorizontal="100dp"
         android:textSize="16sp"
-        android:text="Назад"
+        android:text="@string/back"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"/>
 

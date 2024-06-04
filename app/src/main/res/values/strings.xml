@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">courseWork</string>
+    <string name="armature_sells_building_materials">АРМ продавца строительных материалов</string>
+    <string name="welcome">Добро пожаловать</string>
+    <string name="Please_login_using_your_details">Пожалуйста, войдите, используя свои данные</string>
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
+    <string name="come_in">Войти</string>
+    <string name="register">Зарегестрироваться</string>
+    <string name="employee">Сотрудник</string>
+    <string name="email_employee">Почта сотрудника</string>
+    <string name="back">Назад</string>
+    <string name="select_text">Выберите объект</string>
+    <string name="main_shop_text">Товары в магазине</string>
+    <string name="main_stock_text">Товары на складе</string>
+    <string name="important">Важное</string>
+    <string name="important_text">Перевоз материаолов со склада до магазина занимает от 7 дней</string>
+    <string name="general_cash_register">Общая касса: 0</string>
+    <string name="id">Id</string>
+    <string name="line_1">Количество</string>
+    <string name="line_2">Цена</string>
+    <string name="line_3">Наименование</string>
+    <string name="line_4">Характеристики</string>
+    <string name="btn_add_text">Добавить</string>
+    <string name="button_show_text">Показать</string>
+    <string name="button_sell_text">Продать</string>
+    <string name="button_refresh_text">Обновить</string>
+    <string name="main_text_sugnup">Регистрация нового сотрудника</string>
+    <string name="login">Логин</string>
 </resources>

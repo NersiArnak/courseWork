@@ -19,7 +19,7 @@
             android:layout_marginTop="40dp"
             android:textSize="16sp"
             android:textColor="@color/dark_grey"
-            android:text="АРМ продавца строительных материалов"/>
+            android:text="@string/armature_sells_building_materials"/>
 
         <ImageView
             android:layout_marginTop="25dp"
@@ -48,7 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Добро пожаловать"
+                android:text="@string/welcome"
                 android:textColor="@color/black"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/dark_grey"
                 android:textSize="15sp"
-                android:text="Пожалуйста, войдите, используя свои данные"/>
+                android:text="@string/Please_login_using_your_details"/>
 
             <TextView
                 android:layout_marginTop="30dp"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:text="Почта"
+                android:text="@string/login"
                 android:textColor="@color/dark_grey"/>
 
             <EditText
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textColor="@color/dark_grey"
-                android:text="Пароль"
+                android:text="@string/password"
                 android:textStyle="bold"/>
 
             <EditText
@@ -97,7 +97,7 @@
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"
                 android:backgroundTint="@color/blue_main"
-                android:text="Войти"/>
+                android:text="@string/come_in"/>
 
             <TextView
                 android:id="@+id/textSignUp"
@@ -107,7 +107,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="40dp"
                 android:textColor="@color/dark_grey"
-                android:text="Зарегестрироваться"
+                android:text="@string/register"
                 android:textSize="16sp"/>
 
         </LinearLayout>

@@ -5,11 +5,9 @@ import android.content.Intent;
 public class Data {
     String email;
     String password;
-
     int id;
     int quantity;
     int price;
-
     String nameProduct;
     String characteristics;
 
@@ -17,7 +15,6 @@ public class Data {
         this.email = email;
         this.password = password;
     }
-
     public Data(int id, int quantity, int price, String nameProduct, String characteristics) {
         this.id = id;
         this.quantity = quantity;

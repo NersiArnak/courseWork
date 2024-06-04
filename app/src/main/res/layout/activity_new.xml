@@ -13,7 +13,7 @@
         android:layout_marginHorizontal="15dp"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:text="Сотрудник"/>
+        android:text="@string/employee"/>
 
     <LinearLayout
         android:id="@+id/cont_user_info"
@@ -40,7 +40,7 @@
             android:layout_marginTop="12dp"
             android:textStyle="bold"
             android:textSize="22sp"
-            tools:text="Почта сотрудника"/>
+            tools:text="@string/email_employee"/>
     </LinearLayout>
 
     <Button
@@ -51,7 +51,7 @@
         android:layout_marginHorizontal="100dp"
         android:layout_marginBottom="30dp"
         android:textSize="16sp"
-        android:text="Назад"
+        android:text="@string/back"
         android:layout_alignParentBottom="true"
         />
 
@@ -64,7 +64,7 @@
         android:layout_marginHorizontal="16dp"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:text="Выберите объект"/>
+        android:text="@string/select_text"/>
 
     <LinearLayout
         android:id="@+id/cont_shop"
@@ -84,7 +84,7 @@
             android:textSize="17sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:text="Товары в магазине"/>
+            android:text="@string/main_shop_text"/>
 
         <RelativeLayout
             android:layout_marginTop="10dp"
@@ -128,7 +128,7 @@
             android:textSize="17sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:text="Товары на складе"/>
+            android:text="@string/main_stock_text"/>
 
 
         <RelativeLayout
@@ -166,7 +166,7 @@
         android:textSize="30sp"
         android:textStyle="bold
 "
-        android:text="Важное "/>
+        android:text="@string/important"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -186,7 +186,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="17sp"
-            android:text="Перевоз материаолов со склада до магазина занимает от 7 дней"/>
+            android:text="@string/important_text"/>
 
     </LinearLayout>
 
