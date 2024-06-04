@@ -97,7 +97,7 @@
             android:layout_marginEnd="20dp"
             android:backgroundTint="@color/blue"
             android:textStyle="bold"
-            android:text="Удаление" />
+            android:text="Удалить" />
         <Button
             android:id="@+id/buttonUpdateProducts"
             android:layout_width="180dp"
@@ -105,7 +105,7 @@
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/blue"
             android:textStyle="bold"
-            android:text="Обновление" />
+            android:text="Обновить" />
     </LinearLayout>
 
 

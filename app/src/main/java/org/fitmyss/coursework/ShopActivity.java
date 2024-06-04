@@ -50,7 +50,7 @@ public class ShopActivity extends AppCompatActivity {
         buttonAddProduct = findViewById(R.id.buttonAddProduct);
         buttonViewProducts = findViewById(R.id.buttonViewProducts);
         buttonDeleteProducts = findViewById(R.id.buttonDeleteProducts);
-        backShop = findViewById(R.id.backShop); // Инициализируем backShop
+        backShop = findViewById(R.id.backShop);
 
         textCashBalance = findViewById(R.id.textCashBalanceStock);
 

@@ -25,8 +25,6 @@ public class Data {
         this.nameProduct = nameProduct;
         this.characteristics = characteristics;
     }
-
-    // Геттеры для различных свойств продукта
     public int getQuantity() {
         return quantity;
     }

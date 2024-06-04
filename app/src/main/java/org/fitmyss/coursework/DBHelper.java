@@ -40,78 +40,73 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 4;
 
+
     public DBHelper(@Nullable Context context) {
-        super(context, "example.db", null, DATABASE_VERSION);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        // Создание таблицы для контактов
-        sqLiteDatabase.execSQL("CREATE TABLE " + CONTACTS_TABLE + " (" + COL_EMAIL + " TEXT, " + COL_PASSWORD + " TEXT);");
-
-        // Создание таблицы для продуктов
-        sqLiteDatabase.execSQL("CREATE TABLE " + PRODUCTS_TABLE + " (" +
-                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL_QUANTITY + " INTEGER, " +
-                COL_PRICE + " INTEGER, " +
-                COL_NAME + " TEXT, " +
-                COL_CHARACTERISTICS + " TEXT);");
-
-        // Создание таблицы для продуктов в стоке
-        sqLiteDatabase.execSQL("CREATE TABLE " + PRODUCTS_TABLE_STOCK + " (" +
-                COL_ID_STOCK + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL_QUANTITY_STOCK + " INTEGER, " +
-                COL_PRICE_STOCK + " INTEGER, " +
-                COL_NAME_STOCK + " TEXT, " +
-                COL_CHARACTERISTICS_STOCK + " TEXT);");
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        if (oldVersion < newVersion) {
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + CONTACTS_TABLE);
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PRODUCTS_TABLE);
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PRODUCTS_TABLE_STOCK);
-            onCreate(sqLiteDatabase);
+            super(context, "example.db", null, DATABASE_VERSION);
         }
-    }
+        @Override
+        public void onCreate(SQLiteDatabase sqLiteDatabase) {
+            sqLiteDatabase.execSQL("CREATE TABLE " + CONTACTS_TABLE + " (" + COL_EMAIL + " TEXT, " + COL_PASSWORD + " TEXT);");
+            sqLiteDatabase.execSQL("CREATE TABLE " + PRODUCTS_TABLE + " (" +
+                    COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COL_QUANTITY + " INTEGER, " +
+                    COL_PRICE + " INTEGER, " +
+                    COL_NAME + " TEXT, " +
+                    COL_CHARACTERISTICS + " TEXT);");
+            sqLiteDatabase.execSQL("CREATE TABLE " + PRODUCTS_TABLE_STOCK + " (" +
+                    COL_ID_STOCK + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COL_QUANTITY_STOCK + " INTEGER, " +
+                    COL_PRICE_STOCK + " INTEGER, " +
+                    COL_NAME_STOCK + " TEXT, " +
+                    COL_CHARACTERISTICS_STOCK + " TEXT);");
+        }
 
-    // Методы для таблицы контактов
-    public void deleteAllContacts() {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        sqLiteDatabase.delete(CONTACTS_TABLE, null, null);
-        sqLiteDatabase.close();
-    }
+        @Override
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+            if (oldVersion < newVersion) {
+                sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + CONTACTS_TABLE);
+                sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PRODUCTS_TABLE);
+                sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PRODUCTS_TABLE_STOCK);
+                onCreate(sqLiteDatabase);
+            }
+        }
 
-    public void addContact(Data objData){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues db = new ContentValues();
-        db.put(COL_EMAIL, objData.email);
-        db.put(COL_PASSWORD, objData.password);
-        sqLiteDatabase.insert(CONTACTS_TABLE, null, db);
-        sqLiteDatabase.close();
-    }
+        // Методы для таблицы контактов
+        public void deleteAllContacts() {
+            SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+            sqLiteDatabase.delete(CONTACTS_TABLE, null, null);
+            sqLiteDatabase.close();
+        }
 
-    public Cursor getAllContacts() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + CONTACTS_TABLE, null);
-    }
+        public void addContact(Data objData){
+            SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+            ContentValues db = new ContentValues();
+            db.put(COL_EMAIL, objData.email);
+            db.put(COL_PASSWORD, objData.password);
+            sqLiteDatabase.insert(CONTACTS_TABLE, null, db);
+            sqLiteDatabase.close();
+        }
 
-    public boolean checkUserByEmail(String email) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(CONTACTS_TABLE, new String[]{COL_EMAIL}, COL_EMAIL + "=?", new String[]{email}, null, null, null);
-        boolean exists = cursor.getCount() > 0;
-        cursor.close();
-        return exists;
-    }
+        public Cursor getAllContacts() {
+            SQLiteDatabase db = this.getWritableDatabase();
+            return db.rawQuery("SELECT * FROM " + CONTACTS_TABLE, null);
+        }
 
-    public boolean checkUserPassword(String email, String password) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(CONTACTS_TABLE, new String[]{COL_PASSWORD}, COL_EMAIL + "=? AND " + COL_PASSWORD + "=?", new String[]{email, password}, null, null, null);
-        boolean correctPassword = cursor.getCount() > 0;
-        cursor.close();
-        return correctPassword;
-    }
+        public boolean checkUserByEmail(String email) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query(CONTACTS_TABLE, new String[]{COL_EMAIL}, COL_EMAIL + "=?", new String[]{email}, null, null, null);
+            boolean exists = cursor.getCount() > 0;
+            cursor.close();
+            return exists;
+        }
+
+        public boolean checkUserPassword(String email, String password) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query(CONTACTS_TABLE, new String[]{COL_PASSWORD}, COL_EMAIL + "=? AND " + COL_PASSWORD + "=?", new String[]{email, password}, null, null, null);
+            boolean correctPassword = cursor.getCount() > 0;
+            cursor.close();
+            return correctPassword;
+        }
 
     // Методы для таблицы продуктов
     public void addProduct(Data objData){
@@ -281,5 +276,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void addOne(Data objData){
         addContact(objData);
     }
+
+
 
 }
