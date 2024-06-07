@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class DBHelper extends SQLiteOpenHelper {
     private static final String CONTACTS_TABLE = "contacts";
     private static final String COL_EMAIL = "Email";
@@ -85,7 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
             ContentValues db = new ContentValues();
             db.put(COL_EMAIL, objData.email);
-            db.put(COL_PASSWORD, objData.password);
+            db.put(COL_PASSWORD, hashPassword(objData.password));
             sqLiteDatabase.insert(CONTACTS_TABLE, null, db);
             sqLiteDatabase.close();
         }
@@ -100,11 +104,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
         public boolean checkUserPassword(String email, String password) {
             SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.query(CONTACTS_TABLE, new String[]{COL_PASSWORD}, COL_EMAIL + "=? AND " + COL_PASSWORD + "=?", new String[]{email, password}, null, null, null);
-            boolean correctPassword = cursor.getCount() > 0;
+            Cursor cursor = db.query(CONTACTS_TABLE, new String[]{COL_PASSWORD}, COL_EMAIL + "=?", new String[]{email}, null, null, null);
+            if (cursor!= null && cursor.moveToFirst()) {
+                String hashedPasswordFromDb = cursor.getString(cursor.getColumnIndex(COL_PASSWORD));
+                String hashedInputPassword = hashPassword(password);
+                boolean correctPassword = hashedPasswordFromDb.equals(hashedInputPassword);
+                cursor.close();
+                return correctPassword;
+            }
             cursor.close();
-            return correctPassword;
+            return false;
         }
+
 
     public void addProduct(Data objData){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -275,6 +286,23 @@ public class DBHelper extends SQLiteOpenHelper {
         addContact(objData);
     }
 
+
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 }

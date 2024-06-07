@@ -67,6 +67,13 @@ public class ShopActivity extends AppCompatActivity {
             }
         });
 
+        buttonViewProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewProducts();
+            }
+        });
+
         backShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,12 +98,12 @@ public class ShopActivity extends AppCompatActivity {
                         saveCashBalance();
 
                         viewProducts();
-                        Toast.makeText(ShopActivity.this, "Продукт продан", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShopActivity.this, "Материал продан", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(ShopActivity.this, "Продукт с указанным ID не найден", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShopActivity.this, "Материал с указанным ID не найден", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(ShopActivity.this, "Введите ID продукта для продажи", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShopActivity.this, "Введите ID Материала для продажи", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -120,48 +127,35 @@ public class ShopActivity extends AppCompatActivity {
                     }
 
                     int quantity = Integer.parseInt(quantityString);
-                    int newPrice = Integer.parseInt(priceString);
-                    int newTotalPrice = newPrice * quantity;
+                    int price = Integer.parseInt(priceString);
+                    int currentPrice = dbHelper.getProductPrice(id);
 
-                    // Получаем текущий продукт из базы данных
-                    Data currentProduct = dbHelper.getProductById(id);
+                    price *= quantity;
 
-                    if (currentProduct != null) {
-                        int currentTotalPrice = currentProduct.getPrice();
+                    int priceDifference = currentPrice - price;
 
-                        if (newTotalPrice < currentTotalPrice) {
-                            // Увеличиваем кассовый баланс на разницу между текущей ценой и новой ценой
-                            int difference = currentTotalPrice - newTotalPrice;
-                            cashBalance += difference;
-                            textCashBalance.setText("Общая касса: " + cashBalance);
-                            saveCashBalance();
-                        }
+                    Data newData = new Data(id, quantity, price, name, characteristics);
+                    dbHelper.updateProduct(newData);
 
-                        Data newData = new Data(id, quantity, newPrice, name, characteristics);
-                        dbHelper.updateProduct(newData);
-
-                        viewProducts();
-
-                        Toast.makeText(ShopActivity.this, "Продукт успешно обновлен", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(ShopActivity.this, "Продукт с указанным ID не найден", Toast.LENGTH_SHORT).show();
+                    if (priceDifference > 0) {
+                        cashBalance += priceDifference;
                     }
+
+                    textCashBalance.setText("Общая касса: " + cashBalance);
+                    saveCashBalance();
+
+                    viewProducts();
+
+                    Toast.makeText(ShopActivity.this, "Продукт успешно обновлен", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(ShopActivity.this, "Введите ID продукта для обновления", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-
-        buttonViewProducts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewProducts();
-            }
-        });
-
         loadCashBalance();
     }
+
 
     private void addProduct() {
         String idString = editProductId.getText().toString().trim();
@@ -170,7 +164,6 @@ public class ShopActivity extends AppCompatActivity {
         String name = editName.getText().toString().trim();
         String characteristics = editCharacteristics.getText().toString().trim();
 
-        // Проверяем, заполнены ли все поля
         if (idString.isEmpty() || quantityString.isEmpty() || priceString.isEmpty() || name.isEmpty() || characteristics.isEmpty()) {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show();
             return;
@@ -180,7 +173,6 @@ public class ShopActivity extends AppCompatActivity {
         int quantity = Integer.parseInt(quantityString);
         int price = Integer.parseInt(priceString);
 
-        // Умножаем цену на количество
         price *= quantity;
 
         Data product = new Data(id, quantity, price, name, characteristics);
@@ -206,7 +198,8 @@ public class ShopActivity extends AppCompatActivity {
             stringBuilder.append("Name: ").append(cursor.getString(3)).append("\n");
             stringBuilder.append("Characteristics: ").append(cursor.getString(4)).append("\n\n");
             productList.add(stringBuilder.toString());
-            stringBuilder.setLength(0); // Clear the StringBuilder for the next product
+            stringBuilder.setLength(0);
+
         }
 
         adapter.notifyDataSetChanged();

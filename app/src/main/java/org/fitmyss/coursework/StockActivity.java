@@ -85,12 +85,12 @@ public class StockActivity extends AppCompatActivity {
         buttonDeleteProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String idString = editProductId.getText().toString(); // Получаем ID из EditText
+                String idString = editProductId.getText().toString();
                 if (!idString.isEmpty()) {
                     int id = Integer.parseInt(idString);
                     int priceToDelete = dbHelper.getProductPriceStock(id);
-                    dbHelper.sellProductStock(id); // Изменили на sellProduct
-                    cashBalance += priceToDelete; // Вместо уменьшения, увеличиваем кассовый баланс
+                    dbHelper.sellProductStock(id);
+                    cashBalance += priceToDelete;
                     textCashBalance.setText("Общая касса: " + cashBalance);
                     saveCashBalance();
 
@@ -120,7 +120,6 @@ public class StockActivity extends AppCompatActivity {
 
                     int quantity = Integer.parseInt(quantityString);
                     int price = Integer.parseInt(priceString);
-
                     int currentPrice = dbHelper.getProductPriceStock(id);
 
                     price *= quantity;
@@ -145,9 +144,7 @@ public class StockActivity extends AppCompatActivity {
                 }
             }
         });
-
         loadCashBalance();
-
     }
 
     private void addProductStock() {

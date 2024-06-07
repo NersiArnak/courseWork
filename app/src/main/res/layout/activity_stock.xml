@@ -43,6 +43,13 @@
         android:inputType="number" />
 
     <EditText
+        android:id="@+id/editNameStock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Наименование"
+        android:inputType="text" />
+
+    <EditText
         android:id="@+id/editQuantityStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,12 +62,7 @@
         android:layout_height="wrap_content"
         android:hint="Цена" />
 
-    <EditText
-        android:id="@+id/editNameStock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Наименование"
-        android:inputType="text" />
+
 
     <EditText
         android:id="@+id/editCharacteristicsStock"

@@ -40,6 +40,13 @@
         android:inputType="number" />
 
     <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/line_3"
+        android:inputType="text" />
+
+    <EditText
         android:id="@+id/editQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,12 +59,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/line_2" />
 
-    <EditText
-        android:id="@+id/editName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/line_3"
-        android:inputType="text" />
 
     <EditText
         android:id="@+id/editCharacteristics"
